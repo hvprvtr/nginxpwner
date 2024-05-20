@@ -210,7 +210,7 @@ for pathline in pathlines:
     if makereq.status_code == 401 or makereq.status_code == 403:
         counterunauthorised +=1
         accel = {"X-Accel-Redirect" : "/"+pathline.strip()}
-        accelreq = requests.get(url+"/randompath",headers=accel)
+        accelreq = requests.get(url+"/randompath",headers=accel, verify=False)
         if accelreq.status_code != makereq.status_code:
             print(f"{Fore.RED}[-] Different status code when accessing {pathline.strip()} using a randompath in the URI, but the this path in the X-Accel-Redirect header")
         else:
